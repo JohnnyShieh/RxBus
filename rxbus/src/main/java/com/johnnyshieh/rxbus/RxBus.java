@@ -1,4 +1,4 @@
-package com.johnny.rxbus;
+package com.johnnyshieh.rxbus;
 /*
  * Copyright (C) 2017 Johnny Shieh Open Source Project
  *
@@ -21,7 +21,7 @@ import com.jakewharton.rxrelay2.Relay;
 import io.reactivex.Observable;
 
 /**
- * RxBus based on RxRelay, without error and complete item. 
+ * RxBus based on RxRelay, without error and complete item.
  *
  * @author Johnny Shieh (JohnnyShieh17@gmail.com)
  * @version 1.0

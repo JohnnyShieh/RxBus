@@ -1,4 +1,4 @@
-package com.johnny.rxbus;
+package com.johnnyshieh.rxbus;
 /*
  * Copyright (C) 2017 Johnny Shieh Open Source Project
  *
