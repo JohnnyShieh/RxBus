@@ -1,4 +1,6 @@
 apply plugin: 'java'
+apply plugin: 'com.jfrog.bintray'
+apply plugin: 'com.github.dcendents.android-maven'
 
 dependencies {
     compile fileTree(dir: 'libs', include: ['*.jar'])
@@ -10,3 +12,82 @@ dependencies {
 
 sourceCompatibility = "1.7"
 targetCompatibility = "1.7"
+
+// 项目主页
+def siteUrl = 'https://github.com/JohnnyShieh/RxBus'
+//项目的git地址
+def gitUrl = 'https://github.com/JohnnyShieh/RxBus.git'
+//发布到JCenter上的项目名字
+def libName = "RxBus"
+//发布到组织名称名字，必须填写
+group = "com.johnnyshieh.rxbus"
+// 版本号，下次更新是只需要更改版本号即可
+version = "1.0.0"
+//上面配置后上传至JCenter后的编译路径是这样的： compile 'com.johnnyshieh.rxbus:rxbus2:1.0.0'
+
+install {
+    repositories.mavenInstaller {
+        pom.project {
+            name 'RxBus'
+            description 'RxBus based on RxRelay, without error and complete item.'
+            url siteUrl
+            inceptionYear '2017'
+
+            packaging 'jar'
+            groupId 'com.johnnyshieh.rxbus'
+            artifactId 'rxbus2'
+            version '1.0.0'
+
+            licenses {
+                license {
+                    name 'The Apache Software License, Version 2.0'
+                    url 'http://www.apache.org/licenses/LICENSE-2.0.txt'
+                    distribution 'repo'
+                }
+            }
+            scm {
+                connection gitUrl
+                url siteUrl
+
+            }
+            developers {
+                developer {
+                    //开发者的个人信息
+                    id 'johnny-shieh'
+                    name 'Johnny Shieh'
+                    email 'JohnnyShieh17@gmail.com'
+                }
+            }
+        }
+    }
+}
+
+//上传到JCenter
+Properties properties = new Properties()
+properties.load(project.rootProject.file('local.properties').newDataInputStream())
+bintray {
+    user = properties.getProperty("bintray.user")    //读取 local.properties 文件里面的 bintray.user
+    key = properties.getProperty("bintray.apikey")   //读取 local.properties 文件里面的 bintray.apikey
+    configurations = ['archives']
+    pkg {
+        //这里的repo值必须要和你创建Maven仓库的时候的名字一样
+        repo = "johnny.repo"
+        //发布到JCenter上的项目名字
+        name = libName
+        userOrg = user
+        websiteUrl = siteUrl
+        vcsUrl = gitUrl
+        licenses = ["Apache-2.0"]
+        publish = true
+    }
+}
+javadoc {
+    options{
+        //如果你的项目里面有中文注释的话，必须将格式设置为UTF-8，不然会出现乱码
+        encoding "UTF-8"
+        charSet 'UTF-8'
+        author true
+        version true
+        links "http://docs.oracle.com/javase/7/docs/api"
+    }
+}

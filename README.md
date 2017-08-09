@@ -32,7 +32,7 @@ Consumer<String> onNext = new Consumer<String>() {
         ...
     }
 };
-// observer2 will handle exception when receive "error" string. after that observer2 can also receive items.
+// observer2 will throw exception when receive "error" string. after that observer2 can also receive items.
 ObservableUtils.subscribe(RxBus.get().toObservable(String.class), onNext);
 
 RxBus.get().post("one");
@@ -48,7 +48,7 @@ Download
 
 Gradle:
 ```groovy
-compile 'com.johnnyshieh.rxbus2:rxbus:2.0.0'
+compile 'com.johnnyshieh.rxbus:rxbus2:1.0.0'
 ```
 
 License
